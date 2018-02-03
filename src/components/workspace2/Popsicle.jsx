@@ -1,12 +1,14 @@
 // this file wil need to wrap the contents of the popsicle
 import React from 'react'
 
+require("./popsicle.scss");
+
 const st = {
     popsicle: {
         border: "2px solid rgb(200, 200, 200)",
         boxSizing: "border-box",
         borderRadius: 2,
-        boxShadow: "0px 0px 2px 2px rgb(242, 242, 242), 0px 0px 2px 2px rgb(242, 242, 242) inset",
+        boxShadow: "0px 0px 2px 2px rgb(242, 242, 242)",
         padding: 0,
     },
 
@@ -25,6 +27,13 @@ const st = {
     icon: {
         height: "100%",
         width: "100%",
+    },
+
+    stickWrapper: {
+        display: "inline-block",
+        width: "calc(100% - 70px)",
+        verticalAlign: "top",
+        boxShadow: "0px 0px 2px 2px rgb(242, 242, 242) inset",
     },
 
     stick: {
@@ -71,11 +80,13 @@ export default class Popsicle extends React.Component {
 
     render() {
         return (
-            <div style={st.popsicle}>
-                <div style={st.iconWrapper}>
+            <div style={st.popsicle} className="popsicle">
+                <div style={st.iconWrapper} className="icon">
                     <div style={st.icon}>{this.tProps.icon}</div>
                 </div>
-                <div style={st.stick}>{this.tProps.stick}</div>
+                <div style={st.stickWrapper} className="stick">
+                    <div style={st.stick}>{this.tProps.stick}</div>
+                </div>
             </div>
         )
     }
