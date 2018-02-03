@@ -27,7 +27,7 @@ export default class ScriptEditor extends React.Component {
               value={this.state.code}
               options={this.options}
               editorDidMount={this.editorDidMount}
-              
+              className="editor"
             />
         )
     }

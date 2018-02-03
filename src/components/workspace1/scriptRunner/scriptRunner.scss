@@ -7,4 +7,19 @@
 
 .titleBarActive {
     backgroundColor: #323232;
+    height: 15px;
+}
+
+.editorWrapper {
+    padding-bottom: -15px;
+    height: 100%;
+    border: 2px solid red;
+}
+
+.height100 {
+    height: 100%;
+}
+
+.editor {
+    height: 100%;
 }

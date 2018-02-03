@@ -44,7 +44,7 @@ const config = {
         extensions: ['.css', '.js', '.jsx']
     },
     devServer: {
-        contentBase: 'app',
+        contentBase: 'static',
         port: 4000,
         historyApiFallback: true,
         stats: { colors: true },

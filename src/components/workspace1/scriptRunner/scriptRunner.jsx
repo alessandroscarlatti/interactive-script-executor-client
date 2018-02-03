@@ -5,10 +5,12 @@ require('./scriptRunner.scss')
 export default class ScriptRunner extends React.Component {
     render() {
         return (
-            <span>
+            <div className="height100">
                 <TitleBar title="Script Runner" />
+                <div className="editorWrapper">
                 <ScriptEditor />
-            </span>
+                </div>
+            </div>
         )
     }
 }
