@@ -90,6 +90,11 @@ const st = {
         color: "rgb(200, 200, 200)",
         marginLeft: 70,
     },
+
+    input: {
+        border: "none",
+        width: "100%",
+    },
 };
 
 export default class Popsicle extends React.Component {
@@ -101,10 +106,12 @@ export default class Popsicle extends React.Component {
 
         this.tProps = {};
 
-        this.translateProps(props);
         this.state = {
             varsOpen: true,
+            name: "[Component]",
         };
+
+        this.translateProps(props);
 
         this.data = {
             vars: {},
@@ -122,11 +129,13 @@ export default class Popsicle extends React.Component {
         this.toggleOpenVars = this.toggleOpenVars.bind(this);
         this.onVarChange = this.onVarChange.bind(this);
         this.onVarsInitialize = this.onVarsInitialize.bind(this);
+        this.onClickName = this.onClickName.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
     }
 
     translateProps(props) {
         this.tProps.icon = props.icon != null ? props.icon : <SimpleIcon />;
-        this.tProps.stick = props.stick != null ? props.stick : <this.DefaultStick />;
+        this.tProps.stick = props.stick != null ? props.stick : this.DefaultStick;
     }
 
     componentWillReceiveProps(props) {
@@ -150,6 +159,16 @@ export default class Popsicle extends React.Component {
     onVarChange(varName, value) {
         this.data.vars[varName] = value;
         console.log("data:", this.data)
+    }
+
+    onClickName(e) {
+       e.stopPropagation()
+    }
+
+    onChangeName(e) {
+        this.setState({
+            name: e.target.value
+        })
     }
 
     render() {
@@ -181,7 +200,9 @@ const PopsicleStick = function() {
                 <div style={st.icon}>{this.tProps.icon}</div>
             </div>
             <div style={st.stickWrapper} onClick={this.toggleOpenVars} className="stick">
-                <div style={st.stick}>{this.tProps.stick}</div>
+                <div style={st.stick}>
+                    <this.tProps.stick name={this.state.name} />
+                </div>
             </div>
         </div>)
 };
@@ -222,6 +243,13 @@ export const SimpleIcon = (props) => {
 
 const DefaultStick = function() {
     return (
-        <div style={st.defaultStick}>[Default Div]</div>
+        <div style={st.defaultStick}>
+            <input
+                style={st.input}
+                onClick={this.onClickName}
+                onChange={this.onChangeName}
+                value={this.state.name}
+            />
+        </div>
     )
 };
