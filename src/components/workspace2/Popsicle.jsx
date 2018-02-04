@@ -1,5 +1,7 @@
 // this file wil need to wrap the contents of the popsicle
 import React from 'react'
+import { vars } from './testProps'
+import VarsTable from "./VarsTable";
 
 require("./popsicle.scss");
 
@@ -79,6 +81,15 @@ const st = {
         boxSizing: "border-box",
         backgroundColor: "rgba(12, 12, 64, 0.63)",
     },
+
+    varsTableWrapper: {
+        border: "2px solid rgb(200, 200, 200)",
+        borderTop: "none",
+        boxShadow: "0px 6px 11px -4px rgb(242, 242, 242) inset",
+        borderRadius: "0px 0px 10px 0px",
+        color: "rgb(200, 200, 200)",
+        marginLeft: 70,
+    },
 };
 
 export default class Popsicle extends React.Component {
@@ -92,7 +103,11 @@ export default class Popsicle extends React.Component {
 
         this.translateProps(props);
         this.state = {
-            varsOpen: false,
+            varsOpen: true,
+        };
+
+        this.data = {
+            vars: {},
         };
     }
 
@@ -104,7 +119,9 @@ export default class Popsicle extends React.Component {
         this.Toolbar = Toolbar.bind(this);
         this.DefaultStick = DefaultStick.bind(this);
 
-        this.toggleOpenVars = this.toggleOpenVars.bind(this)
+        this.toggleOpenVars = this.toggleOpenVars.bind(this);
+        this.onVarChange = this.onVarChange.bind(this);
+        this.onVarsInitialize = this.onVarsInitialize.bind(this);
     }
 
     translateProps(props) {
@@ -125,6 +142,16 @@ export default class Popsicle extends React.Component {
         })
     }
 
+    onVarsInitialize(vars) {
+        this.data.vars = vars;
+        console.log("initialized:", this.data)
+    }
+
+    onVarChange(varName, value) {
+        this.data.vars[varName] = value;
+        console.log("data:", this.data)
+    }
+
     render() {
         return (
             <div>
@@ -135,7 +162,10 @@ export default class Popsicle extends React.Component {
                         null :
                         <span>
                             <this.Toolbar />
-                            <this.PopsicleVars />
+                            <this.PopsicleVars
+                                vars={vars}
+                                onVarsInitialize={this.onVarsInitialize}
+                                onVarChange={this.onVarChange} />
                         </span>
                 }
 
@@ -164,30 +194,24 @@ const Toolbar = function () {
     )
 };
 
+/**
+ * If we provide props.vars then each var will get an entry
+ *
+ * this props.vars will override this.props.vars if it is provided.
+ *
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
 export const SimpleVars = function(props) {
 
-    // wrap each key/value
-    let kVs = [];
+    let newProps = {...this.props, ...props};
 
-    if (props.vars != null) props.vars.forEach((v) => {
-        kVs.push(
-            <div key={v.name}>
-                <div>
-                    {v.name}
-                </div>
-                <div>
-                    {v.default}
-                </div>
-            </div>)
-    });
-
-    if (kVs.length === 0) {
-        kVs.push(
-            <div key={"noVars"} style={st.noVars}>No Variables for this Component</div>
-        )
-    }
-
-    return <div>{kVs}</div>
+    return (
+        <div style={st.varsTableWrapper}>
+            <VarsTable {...newProps} />
+        </div>
+    )
 };
 
 export const SimpleIcon = (props) => {

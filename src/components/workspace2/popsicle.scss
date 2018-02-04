@@ -3,10 +3,10 @@
     border-color: rgb(0, 133, 205) !important;
 }
 
-.stick:hover {
-    //background-color: #fbfcfc !important;
+table {
+    border-collapse: collapse;
 }
 
-.icon:hover {
-    //background-color: #fbfcfc !important;
+.varsTableRow:last-child {
+    border: none !important;
 }
