@@ -8,12 +8,41 @@ export const rabbitQueueProps = {
         component: {
             type: "Rabbit Queue",
         },
-        vars: {
-            addresses: "localhost:5672",
-            vhost: "/",
-            username: "guest",
-            password: "guest",
-        },
+        vars: [
+            {
+                name: "addresses",
+                type: "string",
+                desc: "addresses",
+                sugg: "localhost:5672",
+                default: "localhost:5672",
+                for:  ["input"],
+            },
+            {
+                name: "username",
+                type: "string",
+                desc: "username to use for this queue",
+                sugg: "guest by default",
+                default: "guest",
+                for:  ["input"],
+            },
+            {
+                name: "vhost",
+                type: "string",
+                desc: "virtual host to use for this queue",
+                sugg: "/ by default",
+                default: "/",
+                for:  ["input"],
+            },
+            {
+                name: "password",
+                type: "string",
+                disp: ["password"],
+                desc: "password to use for this queue",
+                sugg: "guest by default",
+                default: "/",
+                for:  ["input"],
+            },
+        ],
         disp: {
             name: "Rabbit Queue #1",
             img: "/images/rabbit-queue.png"
