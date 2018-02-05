@@ -16,6 +16,7 @@ const st = {
     tableKey: {
         borderRight: "1px dashed rgb(200, 200, 200)",
         paddingLeft: 10,
+        color: "black",
     },
 
     tableValue: {

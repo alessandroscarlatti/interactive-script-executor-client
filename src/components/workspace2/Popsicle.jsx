@@ -73,13 +73,14 @@ const st = {
 
     toolbar: {
         borderRight: "2px solid rgb(200, 200, 200)",
-        boxShadow: "0px 6px 9px -8px rgb(242, 242, 242) inset",
+        // boxShadow: "0px 6px 9px -8px rgb(242, 242, 242) inset",
         borderRadius: "10px 0px 0px 0px",
         borderTop: "none",
         padding: 10,
         marginLeft: 70,
         boxSizing: "border-box",
-        backgroundColor: "rgba(12, 12, 64, 0.63)",
+        backgroundColor: "rgb(84, 152, 255)",
+        color: "rgb(10, 65, 147)",
     },
 
     varsTableWrapper: {
